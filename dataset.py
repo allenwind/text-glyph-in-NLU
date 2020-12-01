@@ -87,30 +87,6 @@ def load_simplifyweibo_4_moods(file=_MOODS):
     categoricals = {"喜悦": 0, "愤怒": 1, "厌恶": 2, "低落": 3}
     return X, y, categoricals
 
-_jobs = "/home/zhiwen/workspace/dataset/company-jobs/jobs.json"
-def load_company_jobs(file=_jobs):
-    filters = {'投融资', '移动开发', '高端技术职位', '行政', '运营', '人力资源',
-               '后端开发', '市场/营销', '销售', '产品经理', '项目管理', '运维', '测试',
-               '视觉设计', '编辑', '公关', '财务', '客服', '前端开发', '企业软件'}
-    df = pd.read_json(file)
-    df = df.sample(frac=1)
-    X = []
-    y = []
-    for job in df["jobs"]:
-        if job["type"] not in filters:
-            continue
-        X.append(job["desc"])
-        y.append(job["type"])
-    categoricals = list(set(y))
-    categoricals.sort()
-    categoricals = {label: i for i, label in enumerate(categoricals)}
-    y = [categoricals[i] for i in y]
-    return X, y, categoricals
-
-_EMO = "/home/zhiwen/workspace/dataset/CLUEmotionAnalysis2020/CLUEdataset/emotion/"
-def load_clue_emotion(file=_EMO):
-    pass
-
 class Tokenizer:
     """字转ID
     """
