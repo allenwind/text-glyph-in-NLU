@@ -23,10 +23,10 @@ from imagefont import char_to_glyph
 # - val_loss: 0.7873 - val_accuracy: 0.7496
 # - test_loss: 0.7999 - test_accuracy: 0.7476
 
-class GlyceEmbedding(tf.keras.layers.Layer):
+class GlyphEmbedding(tf.keras.layers.Layer):
 
     def __init__(self, char2id, maxlen, start=2, size=32, flatten=True, as_image=True, **kwargs):
-        super(GlyceEmbedding, self).__init__(**kwargs)
+        super(GlyphEmbedding, self).__init__(**kwargs)
         self.size = size
         self.maxlen = maxlen
         # 汉字偏平输出，即句子合并到一张图上
@@ -86,7 +86,7 @@ embedding_dims = 128
 inputs = Input(shape=(maxlen,), dtype=tf.int32)
 mask = Lambda(lambda x: tf.not_equal(x, 0))(inputs)
 
-gembedding = GlyceEmbedding(tokenizer.char2id, maxlen, flatten=True)
+gembedding = GlyphEmbedding(tokenizer.char2id, maxlen, flatten=True)
 conv1 = Conv2D(
     filters=64,
     kernel_size=(3, 3),
