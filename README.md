@@ -50,3 +50,4 @@
 其他ideas：
 
 - 利用预训练思想，随机mask字形的局部，然后预测mask部分
+- Embedding结合字形信息
